@@ -1,0 +1,187 @@
+---
+title: "Análisis y Visualizaciones"
+jupyter: python3
+execute:
+  echo: false
+  warning: false
+---
+
+## 1. Distribución Demográfica del Desempleo
+**Pregunta:** ¿Cómo influyen la edad y el género en el riesgo de desempleo?
+
+```{python}
+#| label: fig-montanas
+#| fig-cap: "Distribución de edad de personas desempleadas según su género."
+
+import pandas as pd
+import altair as alt
+
+# 1. Cargar la muestra ligera que generamos
+df = pd.read_csv('muestra_desempleo_5k.csv')
+
+# 2. Filtrar solo a las personas desempleadas para este análisis
+df_desempleados = df[df['Desempleo'] == 1]
+
+# 3. Construir el Ridgeline Plot
+grafico_montanas = alt.Chart(df_desempleados).transform_density(
+    'EdadJun24',
+    as_=['Edad', 'Densidad'],
+    extent=[18, 75], # Rango estimado de edades en la fuerza laboral
+    groupby=['Genero']
+).mark_area(
+    opacity=0.7,
+    stroke='black',
+    strokeWidth=0.5
+).encode(
+    x=alt.X('Edad:Q', title='Edad (Años)', axis=alt.Axis(grid=False)),
+    # Ocultamos el eje Y numérico para que parezca una montaña limpia
+    y=alt.Y('Densidad:Q', title=None, axis=None), 
+    color=alt.Color('Genero:N', legend=None, scale=alt.Scale(scheme='pastel1')),
+    # 'row' crea una línea base para cada género
+    row=alt.Row('Genero:N', title=None, header=alt.Header(labelAngle=0, labelAlign='right')) 
+).properties(
+    width=600,
+    height=80, # Altura individual de cada montaña
+    title='Densidad de Desempleo por Edad y Género'
+).configure_facet(
+    spacing=-20 # El espacio negativo hace que las montañas se superpongan un poco
+).configure_view(
+    stroke=None
+).interactive()
+
+# Mostrar el gráfico
+grafico_montanas
+```
+
+**Interpretación:** ...
+
+## 2. Mapa de Riesgo por Sector Económico
+**Pregunta:** ¿Qué sectores de la economía ecuatoriana están en mayor peligro?
+
+```{python}
+#| label: fig-treemap
+#| fig-cap: "Tamaño del sector (área) vs. Tasa de desempleo (color)."
+!pip install squarify
+import pandas as pd
+import altair as alt
+import squarify
+
+# 1. Cargar los datos
+df = pd.read_csv('muestra_desempleo_5k.csv')
+
+# 2. Agrupar por tipo de empresa (tep_descripcion_clean)
+# Calculamos: Área = Total de personas, Color = Tasa de desempleo (Promedio de la variable 0 y 1)
+df_sector = df.groupby('tep_descripcion_clean').agg(
+    Total=('Desempleo', 'count'),
+    Tasa_Desempleo=('Desempleo', 'mean')
+).reset_index()
+
+# Ordenar de mayor a menor para que el treemap se dibuje en orden
+df_sector = df_sector.sort_values(by='Total', ascending=False)
+
+# 3. Calcular las coordenadas de los cuadros usando squarify
+# Definimos un lienzo imaginario de 100x100
+x = 0; y = 0; width = 100; height = 100
+valores = df_sector['Total'].values.tolist()
+valores_norm = squarify.normalize_sizes(valores, width, height)
+rects = squarify.squarify(valores_norm, x, y, width, height)
+
+# Extraemos las coordenadas matemáticas y las agregamos al dataframe
+df_sector['x'] = [r['x'] for r in rects]
+df_sector['y'] = [r['y'] for r in rects]
+df_sector['x2'] = [r['x'] + r['dx'] for r in rects]
+df_sector['y2'] = [r['y'] + r['dy'] for r in rects]
+
+# 4. Construir el gráfico base (los rectángulos)
+cuadros = alt.Chart(df_sector).mark_rect(stroke='white', strokeWidth=1.5).encode(
+    x=alt.X('x:Q', axis=None),
+    x2='x2:Q',
+    y=alt.Y('y:Q', axis=None),
+    y2='y2:Q',
+    color=alt.Color('Tasa_Desempleo:Q', 
+                    scale=alt.Scale(scheme='reds'), # Escala de rojos para el "riesgo"
+                    title='Tasa de Desempleo',
+                    legend=alt.Legend(format='.1%')),
+    # ¡Aquí está la magia de Altair! El tooltip interactivo
+    tooltip=[
+        alt.Tooltip('tep_descripcion_clean:N', title='Tipo de Empresa'),
+        alt.Tooltip('Total:Q', title='Total en Muestra'),
+        alt.Tooltip('Tasa_Desempleo:Q', title='Tasa de Desempleo', format='.1%')
+    ]
+)
+
+# 5. Agregar el texto en el centro de los cuadros
+texto = alt.Chart(df_sector).transform_calculate(
+    x_centro='(datum.x + datum.x2) / 2',
+    y_centro='(datum.y + datum.y2) / 2'
+).mark_text(align='center', baseline='middle', fontSize=10, limit=80).encode(
+    x='x_centro:Q',
+    y='y_centro:Q',
+    text='tep_descripcion_clean:N',
+    # Ocultamos el texto de los cuadros muy pequeños para que no se amontone
+    opacity=alt.condition(alt.datum.Total > 50, alt.value(1), alt.value(0))
+)
+
+# Unimos las capas y mostramos
+grafico_treemap = (cuadros + texto).properties(
+    width=650,
+    height=400,
+    title='Riesgo de Desempleo según el Tipo de Empresa'
+).configure_view(
+    strokeWidth=0
+).interactive()
+
+grafico_treemap
+```
+
+**Interpretación:** ...
+
+## 3. Rentabilidad Empresarial vs. Nivel Educativo
+**Pregunta:** ¿Una empresa con baja rentabilidad (ROA) protege a perfiles con mayor educación o el despido es generalizado?
+
+```{python}
+#| label: fig-heatmap
+#| fig-cap: "Riesgo de desempleo según la rentabilidad (ROA) y nivel educativo."
+
+import pandas as pd
+import altair as alt
+
+# 1. Cargar la muestra
+df = pd.read_csv('muestra_desempleo_5k.csv')
+
+# 2. Definir el orden lógico de la educación para el eje Y
+orden_educacion = ['Superior', 'Secundaria', 'Primaria', 'Sin Educación']
+
+# 3. Construir el Heatmap
+grafico_calor = alt.Chart(df).mark_rect(stroke='white', strokeWidth=0.5).encode(
+    # Agrupamos el ROA en unos 15 bloques (bins) para que se formen las columnas del mapa
+    x=alt.X('roa:Q', 
+            bin=alt.Bin(maxbins=15), 
+            title='Rentabilidad de la Empresa (ROA)'),
+    y=alt.Y('Nivel_Educacion:N', 
+            sort=orden_educacion, 
+            title='Nivel de Educación'),
+    # El color será el promedio de desempleo (la tasa de riesgo) en esa intersección
+    color=alt.Color('mean(Desempleo):Q', 
+                    scale=alt.Scale(scheme='orangered'), 
+                    title='Tasa de Riesgo',
+                    legend=alt.Legend(format='.1%')),
+    # Tooltip interactivo
+    tooltip=[
+        alt.Tooltip('Nivel_Educacion:N', title='Educación'),
+        alt.Tooltip('mean(Desempleo):Q', title='Riesgo de Desempleo', format='.1%'),
+        alt.Tooltip('count()', title='Total de Casos')
+    ]
+).properties(
+    width=600,
+    height=250,
+    title='Zonas de Riesgo: Educación frente a la Salud Financiera de la Empresa'
+).configure_axis(
+    labelFontSize=11,
+    titleFontSize=13
+)
+
+grafico_calor
+```
+
+**Interpretación:** ...

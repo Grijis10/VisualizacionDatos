@@ -1,0 +1,130 @@
+---
+title: "Limpieza y Preparación de Datos"
+jupyter: python3
+---
+
+En esta sección se documenta el proceso de carga, exploración y limpieza de los datos previos al análisis visual.
+
+## 1. Carga del Dataset
+A continuación, cargamos el archivo principal de datos para iniciar la exploración.
+
+```{python}
+#| label: carga-datos
+
+import pandas as pd
+
+# Cargar el archivo pkl (reemplaza con el nombre exacto de tu archivo)
+archivo_pkl = 'df_determinista_checkpoint.pkl' 
+df = pd.read_pickle(archivo_pkl)
+
+# Mostrar la información general del dataset (columnas, tipos de datos y nulos)
+df.info()
+
+# Mostrar las primeras 5 filas para un vistazo rápido
+df.head()
+
+```
+
+## 2. Limpieza de Datos
+
+```{python}
+#| label: filtrado-y-transformacion
+
+import numpy as np
+
+# 1. Definir las columnas exactas de interés con tu corrección
+columnas_seleccionadas = [
+    'Desempleo', 'Mujer', 'EdadJun24', 'roa', 
+    'tep_descripcion_clean', # Variable de tipo de empresa / sector
+    'SinEduc', 'Primaria', 'Secundaria', 'Superior', 
+    'apo_salario', 'Antiguedad' 
+]
+
+# Filtrar el dataframe
+df_limpio = df[columnas_seleccionadas].copy()
+
+# 2. Transformar Educación (Método optimizado para 2.2M de registros)
+condiciones = [
+    df_limpio['Superior'] == 1,
+    df_limpio['Secundaria'] == 1,
+    df_limpio['Primaria'] == 1,
+    df_limpio['SinEduc'] == 1
+]
+opciones = ['Superior', 'Secundaria', 'Primaria', 'Sin Educación']
+
+# Crea la nueva columna rapidísimo y mantiene las dummies originales
+df_limpio['Nivel_Educacion'] = np.select(condiciones, opciones, default='Desconocido')
+
+# 3. Transformar Género a texto (también optimizado)
+df_limpio['Genero'] = np.where(df_limpio['Mujer'] == 1, 'Mujer', 'Hombre')
+
+# Ver el resultado final
+df_limpio.info()
+df_limpio.head()
+```
+
+```{python}
+#| label: manejo-nulos
+
+# 1. Verificar cuántos nulos hay por columna
+print("Nulos por columna antes de limpiar:")
+print(df_limpio.isnull().sum())
+
+# 2. Eliminar cualquier fila que contenga valores nulos en nuestras variables de interés
+df_limpio = df_limpio.dropna()
+
+# 3. Confirmar el tamaño de la base después de la limpieza
+print(f"\nTotal de registros listos para el muestreo: {len(df_limpio)}")
+```
+
+```{python}
+#| label: capping-financiero
+
+# 1. Definir las variables financieras a truncar
+vars_financieras = ['roa']
+
+# Diccionario para documentar los umbrales en tu página web
+umbrales_calculados = {}
+
+# 2. Aplicar capping al 1% y 99%
+for col in vars_financieras:
+    lower_limit = df_limpio[col].quantile(0.01)
+    upper_limit = df_limpio[col].quantile(0.99)
+    
+    umbrales_calculados[col] = (lower_limit, upper_limit)
+    
+    # Truncar los datos extremos
+    df_limpio[col] = df_limpio[col].clip(lower=lower_limit, upper=upper_limit)
+
+# 3. Mostrar los resultados en el documento
+print("✅ Capping estadístico completado exitosamente para visualización.")
+print(f"Rango del ROA ajustado: [{umbrales_calculados['roa'][0]:.4f}, {umbrales_calculados['roa'][1]:.4f}]")
+```
+
+
+## 3. Muestreo para Análisis Visual
+```{python}
+#| label: muestreo-y-exportacion
+
+# 1. Separar la base limpia en dos grupos (Empleados = 0, Desempleados = 1)
+df_empleados = df_limpio[df_limpio['Desempleo'] == 0]
+df_desempleados = df_limpio[df_limpio['Desempleo'] == 1]
+
+# 2. Tomar 2,500 registros aleatorios de cada grupo
+# (Usamos random_state=42 para garantizar que siempre obtengas la misma muestra)
+muestra_empleados = df_empleados.sample(n=2500, random_state=42)
+muestra_desempleados = df_desempleados.sample(n=2500, random_state=42)
+
+# 3. Unir ambas muestras, mezclar las filas (frac=1) y reiniciar el índice
+df_muestra = pd.concat([muestra_empleados, muestra_desempleados]).sample(frac=1, random_state=42).reset_index(drop=True)
+
+# 4. Verificar que la muestra quedó perfectamente balanceada
+print("Distribución de la variable Desempleo en la muestra final:")
+print(df_muestra['Desempleo'].value_counts())
+
+# 5. Exportar la muestra a un archivo CSV ligero
+nombre_archivo_salida = 'muestra_desempleo_5k.csv'
+df_muestra.to_csv(nombre_archivo_salida, index=False)
+print(f"\n¡Muestra exportada exitosamente como '{nombre_archivo_salida}'!")
+```
+

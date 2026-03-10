@@ -1,0 +1,19 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Riesgo de Desempleo en Ecuador"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Inicio
+      - href: data_cleaning.qmd
+        text: Preparación de Datos
+      - href: visualizations.qmd
+        text: Visualizaciones
+
+format:
+  html:
+    theme: cosmo
+    toc: true

@@ -1,0 +1,21 @@
+---
+title: "¿Quiénes tienen más riesgo de perder su empleo en Ecuador?"
+---
+
+## Contexto y Problema
+En la economía ecuatoriana, la rigidez impuesta por la dolarización limita los mecanismos tradicionales de ajuste frente a choques externos o contracciones económicas. Al no poder ajustar mediante la política monetaria o la devaluación, el mercado laboral absorbe gran parte del impacto, traduciéndose frecuentemente en recortes de personal. 
+
+## Motivación
+El objetivo de este análisis es identificar visualmente qué características demográficas y factores económicos hacen que ciertos grupos de la población sean más vulnerables al desempleo antes de que la pérdida de trabajo se materialice.
+
+## Preguntas Principales
+* ¿Cómo influyen la edad, el género y la educación en el riesgo de desempleo?
+* ¿Cómo afecta la rentabilidad (ROA) de las empresas a las decisiones de despido?
+* ¿Qué sectores económicos concentran el mayor riesgo?
+
+## El Dataset
+El análisis se fundamenta en un conjunto de datos privados provenientes del sector financiero ecuatoriano, que contiene aproximadamente 2.2 millones de observaciones. Incluye variables personales (edad, género, nivel de educación) y económicas (ROA, sector económico).
+
+## Estructura del Proyecto
+* [Limpieza y Preparación de Datos](data_cleaning.qmd): Documentación del procesamiento del dataset.
+* [Análisis y Visualizaciones](visualizations.qmd): Desarrollo de las preguntas analíticas a través de narrativa visual.

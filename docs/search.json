@@ -1,0 +1,100 @@
+[
+  {
+    "objectID": "visualizations.html",
+    "href": "visualizations.html",
+    "title": "Análisis y Visualizaciones",
+    "section": "",
+    "text": "Pregunta: ¿Cómo influyen la edad y el género en el riesgo de desempleo?\n\n\n\n\n\n\n\n\n\n\nFigure 1: Distribución de edad de personas desempleadas según su género.\n\n\n\n\nInterpretación: …"
+  },
+  {
+    "objectID": "visualizations.html#distribución-demográfica-del-desempleo",
+    "href": "visualizations.html#distribución-demográfica-del-desempleo",
+    "title": "Análisis y Visualizaciones",
+    "section": "",
+    "text": "Pregunta: ¿Cómo influyen la edad y el género en el riesgo de desempleo?\n\n\n\n\n\n\n\n\n\n\nFigure 1: Distribución de edad de personas desempleadas según su género.\n\n\n\n\nInterpretación: …"
+  },
+  {
+    "objectID": "visualizations.html#mapa-de-riesgo-por-sector-económico",
+    "href": "visualizations.html#mapa-de-riesgo-por-sector-económico",
+    "title": "Análisis y Visualizaciones",
+    "section": "2. Mapa de Riesgo por Sector Económico",
+    "text": "2. Mapa de Riesgo por Sector Económico\nPregunta: ¿Qué sectores de la economía ecuatoriana están en mayor peligro?\n\n\nRequirement already satisfied: squarify in c:\\users\\danie\\onedrive\\2026\\maestria ciencia de datos\\visualizacion de datos\\trabajo_final\\.venv\\lib\\site-packages (0.4.4)\n\n\n\n\n\n\n\n\n\n\nFigure 2: Tamaño del sector (área) vs. Tasa de desempleo (color).\n\n\n\n\nInterpretación: …"
+  },
+  {
+    "objectID": "visualizations.html#rentabilidad-empresarial-vs.-nivel-educativo",
+    "href": "visualizations.html#rentabilidad-empresarial-vs.-nivel-educativo",
+    "title": "Análisis y Visualizaciones",
+    "section": "3. Rentabilidad Empresarial vs. Nivel Educativo",
+    "text": "3. Rentabilidad Empresarial vs. Nivel Educativo\nPregunta: ¿Una empresa con baja rentabilidad (ROA) protege a perfiles con mayor educación o el despido es generalizado?\n\n\n\n\n\n\n\n\n\n\nFigure 3: Riesgo de desempleo según la rentabilidad (ROA) y nivel educativo.\n\n\n\n\nInterpretación: …"
+  },
+  {
+    "objectID": "data_cleaning.html",
+    "href": "data_cleaning.html",
+    "title": "Limpieza y Preparación de Datos",
+    "section": "",
+    "text": "En esta sección se documenta el proceso de carga, exploración y limpieza de los datos previos al análisis visual."
+  },
+  {
+    "objectID": "data_cleaning.html#carga-del-dataset",
+    "href": "data_cleaning.html#carga-del-dataset",
+    "title": "Limpieza y Preparación de Datos",
+    "section": "1. Carga del Dataset",
+    "text": "1. Carga del Dataset\nA continuación, cargamos el archivo principal de datos para iniciar la exploración.\n\nimport pandas as pd\n\n# Cargar el archivo pkl (reemplaza con el nombre exacto de tu archivo)\narchivo_pkl = 'df_determinista_checkpoint.pkl' \ndf = pd.read_pickle(archivo_pkl)\n\n# Mostrar la información general del dataset (columnas, tipos de datos y nulos)\ndf.info()\n\n# Mostrar las primeras 5 filas para un vistazo rápido\ndf.head()\n\n&lt;class 'pandas.DataFrame'&gt;\nRangeIndex: 2258935 entries, 0 to 2258934\nData columns (total 28 columns):\n #   Column                   Dtype   \n---  ------                   -----   \n 0   Desempleo                int8    \n 1   apo_salario              float32 \n 2   Mujer                    int8    \n 3   Destciv1                 int8    \n 4   Destciv2                 int8    \n 5   Destciv3                 int8    \n 6   Destciv4                 int8    \n 7   Destciv5                 int8    \n 8   SinEduc                  int8    \n 9   Primaria                 int8    \n 10  Secundaria               int8    \n 11  Superior                 int8    \n 12  Extranjero               int8    \n 13  EdadJun24                int8    \n 14  Antiguedad               int16   \n 15  ciiu                     category\n 16  roa                      float32 \n 17  roe                      float32 \n 18  wc_ta_pct                float32 \n 19  ebit_ta                  float32 \n 20  sales_ta_pct             float32 \n 21  mv_equity_bl             float32 \n 22  current_ratio            float32 \n 23  quick_ratio              float32 \n 24  interest_coverage        float32 \n 25  tep_descripcion_clean    category\n 26  ciu_descripcion_resumen  category\n 27  ind_sin_data_fin         int8    \ndtypes: category(3), float32(10), int16(1), int8(14)\nmemory usage: 129.3 MB\n\n\n\n\n\n\n\n\n\nDesempleo\napo_salario\nMujer\nDestciv1\nDestciv2\nDestciv3\nDestciv4\nDestciv5\nSinEduc\nPrimaria\n...\nwc_ta_pct\nebit_ta\nsales_ta_pct\nmv_equity_bl\ncurrent_ratio\nquick_ratio\ninterest_coverage\ntep_descripcion_clean\nciu_descripcion_resumen\nind_sin_data_fin\n\n\n\n\n0\n0\n460.0\n1\n0\n0\n0\n1\n0\n0\n1\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\nEMPLEADOR DOMESTICO\nCIUDADANO\n1\n\n\n1\n0\n460.0\n1\n1\n0\n0\n0\n0\n0\n1\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\nEMPLEADOR DOMESTICO\nCIUDADANO\n1\n\n\n2\n1\n460.0\n1\n1\n0\n0\n0\n0\n0\n1\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\nEMPLEADOR DOMESTICO\nCIUDADANO\n1\n\n\n3\n0\n460.0\n1\n0\n0\n0\n1\n0\n0\n0\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\nEMPLEADOR DOMESTICO\nCIUDADANO\n1\n\n\n4\n0\n460.0\n1\n0\n0\n0\n1\n0\n0\n1\n...\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\n0.0\nEMPLEADOR DOMESTICO\nCIUDADANO\n1\n\n\n\n\n5 rows × 28 columns"
+  },
+  {
+    "objectID": "data_cleaning.html#limpieza-de-datos",
+    "href": "data_cleaning.html#limpieza-de-datos",
+    "title": "Limpieza y Preparación de Datos",
+    "section": "2. Limpieza de Datos",
+    "text": "2. Limpieza de Datos\n\nimport numpy as np\n\n# 1. Definir las columnas exactas de interés con tu corrección\ncolumnas_seleccionadas = [\n    'Desempleo', 'Mujer', 'EdadJun24', 'roa', \n    'tep_descripcion_clean', # Variable de tipo de empresa / sector\n    'SinEduc', 'Primaria', 'Secundaria', 'Superior', \n    'apo_salario', 'Antiguedad' \n]\n\n# Filtrar el dataframe\ndf_limpio = df[columnas_seleccionadas].copy()\n\n# 2. Transformar Educación (Método optimizado para 2.2M de registros)\ncondiciones = [\n    df_limpio['Superior'] == 1,\n    df_limpio['Secundaria'] == 1,\n    df_limpio['Primaria'] == 1,\n    df_limpio['SinEduc'] == 1\n]\nopciones = ['Superior', 'Secundaria', 'Primaria', 'Sin Educación']\n\n# Crea la nueva columna rapidísimo y mantiene las dummies originales\ndf_limpio['Nivel_Educacion'] = np.select(condiciones, opciones, default='Desconocido')\n\n# 3. Transformar Género a texto (también optimizado)\ndf_limpio['Genero'] = np.where(df_limpio['Mujer'] == 1, 'Mujer', 'Hombre')\n\n# Ver el resultado final\ndf_limpio.info()\ndf_limpio.head()\n\n&lt;class 'pandas.DataFrame'&gt;\nRangeIndex: 2258935 entries, 0 to 2258934\nData columns (total 13 columns):\n #   Column                 Dtype   \n---  ------                 -----   \n 0   Desempleo              int8    \n 1   Mujer                  int8    \n 2   EdadJun24              int8    \n 3   roa                    float32 \n 4   tep_descripcion_clean  category\n 5   SinEduc                int8    \n 6   Primaria               int8    \n 7   Secundaria             int8    \n 8   Superior               int8    \n 9   apo_salario            float32 \n 10  Antiguedad             int16   \n 11  Nivel_Educacion        str     \n 12  Genero                 str     \ndtypes: category(1), float32(2), int16(1), int8(7), str(2)\nmemory usage: 73.2 MB\n\n\n\n\n\n\n\n\n\nDesempleo\nMujer\nEdadJun24\nroa\ntep_descripcion_clean\nSinEduc\nPrimaria\nSecundaria\nSuperior\napo_salario\nAntiguedad\nNivel_Educacion\nGenero\n\n\n\n\n0\n0\n1\n39\n0.0\nEMPLEADOR DOMESTICO\n0\n1\n0\n0\n460.0\n42\nPrimaria\nMujer\n\n\n1\n0\n1\n44\n0.0\nEMPLEADOR DOMESTICO\n0\n1\n0\n0\n460.0\n171\nPrimaria\nMujer\n\n\n2\n1\n1\n51\n0.0\nEMPLEADOR DOMESTICO\n0\n1\n0\n0\n460.0\n78\nPrimaria\nMujer\n\n\n3\n0\n1\n50\n0.0\nEMPLEADOR DOMESTICO\n0\n0\n1\n0\n460.0\n46\nSecundaria\nMujer\n\n\n4\n0\n1\n30\n0.0\nEMPLEADOR DOMESTICO\n0\n1\n0\n0\n460.0\n24\nPrimaria\nMujer\n\n\n\n\n\n\n\n\n# 1. Verificar cuántos nulos hay por columna\nprint(\"Nulos por columna antes de limpiar:\")\nprint(df_limpio.isnull().sum())\n\n# 2. Eliminar cualquier fila que contenga valores nulos en nuestras variables de interés\ndf_limpio = df_limpio.dropna()\n\n# 3. Confirmar el tamaño de la base después de la limpieza\nprint(f\"\\nTotal de registros listos para el muestreo: {len(df_limpio)}\")\n\nNulos por columna antes de limpiar:\nDesempleo                0\nMujer                    0\nEdadJun24                0\nroa                      0\ntep_descripcion_clean    0\nSinEduc                  0\nPrimaria                 0\nSecundaria               0\nSuperior                 0\napo_salario              0\nAntiguedad               0\nNivel_Educacion          0\nGenero                   0\ndtype: int64\n\nTotal de registros listos para el muestreo: 2258935\n\n\n\n# 1. Definir las variables financieras a truncar\nvars_financieras = ['roa']\n\n# Diccionario para documentar los umbrales en tu página web\numbrales_calculados = {}\n\n# 2. Aplicar capping al 1% y 99%\nfor col in vars_financieras:\n    lower_limit = df_limpio[col].quantile(0.01)\n    upper_limit = df_limpio[col].quantile(0.99)\n    \n    umbrales_calculados[col] = (lower_limit, upper_limit)\n    \n    # Truncar los datos extremos\n    df_limpio[col] = df_limpio[col].clip(lower=lower_limit, upper=upper_limit)\n\n# 3. Mostrar los resultados en el documento\nprint(\"✅ Capping estadístico completado exitosamente para visualización.\")\nprint(f\"Rango del ROA ajustado: [{umbrales_calculados['roa'][0]:.4f}, {umbrales_calculados['roa'][1]:.4f}]\")\n\n✅ Capping estadístico completado exitosamente para visualización.\nRango del ROA ajustado: [-18.9247, 28.6028]"
+  },
+  {
+    "objectID": "data_cleaning.html#muestreo-para-análisis-visual",
+    "href": "data_cleaning.html#muestreo-para-análisis-visual",
+    "title": "Limpieza y Preparación de Datos",
+    "section": "3. Muestreo para Análisis Visual",
+    "text": "3. Muestreo para Análisis Visual\n\n# 1. Separar la base limpia en dos grupos (Empleados = 0, Desempleados = 1)\ndf_empleados = df_limpio[df_limpio['Desempleo'] == 0]\ndf_desempleados = df_limpio[df_limpio['Desempleo'] == 1]\n\n# 2. Tomar 2,500 registros aleatorios de cada grupo\n# (Usamos random_state=42 para garantizar que siempre obtengas la misma muestra)\nmuestra_empleados = df_empleados.sample(n=2500, random_state=42)\nmuestra_desempleados = df_desempleados.sample(n=2500, random_state=42)\n\n# 3. Unir ambas muestras, mezclar las filas (frac=1) y reiniciar el índice\ndf_muestra = pd.concat([muestra_empleados, muestra_desempleados]).sample(frac=1, random_state=42).reset_index(drop=True)\n\n# 4. Verificar que la muestra quedó perfectamente balanceada\nprint(\"Distribución de la variable Desempleo en la muestra final:\")\nprint(df_muestra['Desempleo'].value_counts())\n\n# 5. Exportar la muestra a un archivo CSV ligero\nnombre_archivo_salida = 'muestra_desempleo_5k.csv'\ndf_muestra.to_csv(nombre_archivo_salida, index=False)\nprint(f\"\\n¡Muestra exportada exitosamente como '{nombre_archivo_salida}'!\")\n\nDistribución de la variable Desempleo en la muestra final:\nDesempleo\n0    2500\n1    2500\nName: count, dtype: int64\n\n¡Muestra exportada exitosamente como 'muestra_desempleo_5k.csv'!"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "¿Quiénes tienen más riesgo de perder su empleo en Ecuador?",
+    "section": "",
+    "text": "En la economía ecuatoriana, la rigidez impuesta por la dolarización limita los mecanismos tradicionales de ajuste frente a choques externos o contracciones económicas. Al no poder ajustar mediante la política monetaria o la devaluación, el mercado laboral absorbe gran parte del impacto, traduciéndose frecuentemente en recortes de personal."
+  },
+  {
+    "objectID": "index.html#contexto-y-problema",
+    "href": "index.html#contexto-y-problema",
+    "title": "¿Quiénes tienen más riesgo de perder su empleo en Ecuador?",
+    "section": "",
+    "text": "En la economía ecuatoriana, la rigidez impuesta por la dolarización limita los mecanismos tradicionales de ajuste frente a choques externos o contracciones económicas. Al no poder ajustar mediante la política monetaria o la devaluación, el mercado laboral absorbe gran parte del impacto, traduciéndose frecuentemente en recortes de personal."
+  },
+  {
+    "objectID": "index.html#motivación",
+    "href": "index.html#motivación",
+    "title": "¿Quiénes tienen más riesgo de perder su empleo en Ecuador?",
+    "section": "Motivación",
+    "text": "Motivación\nEl objetivo de este análisis es identificar visualmente qué características demográficas y factores económicos hacen que ciertos grupos de la población sean más vulnerables al desempleo antes de que la pérdida de trabajo se materialice."
+  },
+  {
+    "objectID": "index.html#preguntas-principales",
+    "href": "index.html#preguntas-principales",
+    "title": "¿Quiénes tienen más riesgo de perder su empleo en Ecuador?",
+    "section": "Preguntas Principales",
+    "text": "Preguntas Principales\n\n¿Cómo influyen la edad, el género y la educación en el riesgo de desempleo?\n¿Cómo afecta la rentabilidad (ROA) de las empresas a las decisiones de despido?\n¿Qué sectores económicos concentran el mayor riesgo?"
+  },
+  {
+    "objectID": "index.html#el-dataset",
+    "href": "index.html#el-dataset",
+    "title": "¿Quiénes tienen más riesgo de perder su empleo en Ecuador?",
+    "section": "El Dataset",
+    "text": "El Dataset\nEl análisis se fundamenta en un conjunto de datos privados provenientes del sector financiero ecuatoriano, que contiene aproximadamente 2.2 millones de observaciones. Incluye variables personales (edad, género, nivel de educación) y económicas (ROA, sector económico)."
+  },
+  {
+    "objectID": "index.html#estructura-del-proyecto",
+    "href": "index.html#estructura-del-proyecto",
+    "title": "¿Quiénes tienen más riesgo de perder su empleo en Ecuador?",
+    "section": "Estructura del Proyecto",
+    "text": "Estructura del Proyecto\n\nLimpieza y Preparación de Datos: Documentación del procesamiento del dataset.\nAnálisis y Visualizaciones: Desarrollo de las preguntas analíticas a través de narrativa visual."
+  }
+]
