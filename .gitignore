@@ -3,7 +3,7 @@
 
 # Archivos de datos pesados y temporales
 *.pkl
-*.csv
+#*.csv
 .quarto/
 _site/
 .ipynb_checkpoints/

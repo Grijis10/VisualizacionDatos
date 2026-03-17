@@ -9,6 +9,8 @@ execute:
 ## 1. Distribución Demográfica del Desempleo
 **Pregunta:** ¿Cómo influyen la edad y el género en el riesgo de desempleo?
 
+**Justificación:** Se realizó un gráfico de montañas (ridgeline plot) para visualizar la distribución de edad entre las personas desempleadas, segmentado por género. Esto permite identificar patrones de riesgo de desempleo según la edad y el género, facilitando la interpretación de los datos demográficos en relación con el desempleo y resulta más intuitivo y legible que un histograma tradicional.
+
 ```{python}
 #| label: fig-montanas
 #| fig-cap: "Distribución de edad de personas desempleadas según su género."
@@ -53,10 +55,12 @@ grafico_montanas = alt.Chart(df_desempleados).transform_density(
 grafico_montanas
 ```
 
-**Interpretación:** ...
+**Interpretación:** Lo que podemos visualizar es que ambas distribuciones tienen su pico alrededor de los 25-30 años, pero el género masculino muestra una distribución ligeramente más amplia, lo que podría indicar que los hombres enfrentan un riesgo de desempleo más disperso a lo largo de diferentes edades. Además, se observa que el área bajo la curva para los hombres es mayor, lo que sugiere una mayor proporción de desempleo en comparación con las mujeres. 
 
-## 2. Mapa de Riesgo por Sector Económico
-**Pregunta:** ¿Qué sectores de la economía ecuatoriana están en mayor peligro?
+## 2. Mapa de Riesgo por Tipo de Empresa
+**Pregunta:** ¿Qué empresas de la economía ecuatoriana están en mayor peligro?
+
+**Justificación:** Se optó por un gráfico de treemap para visualizar el riesgo de desempleo por tipo de empresa, ya que permite representar simultáneamente la proporción de personas desempleadas (área) y la tasa de desempleo (color) en cada empresa. Esto facilita la identificación visual de los sectores más vulnerables, mostrando claramente cuáles tienen mayor concentración de desempleo y cuáles presentan tasas más altas, todo en un formato compacto y fácil de interpretar.
 
 ```{python}
 #| label: fig-treemap
@@ -113,13 +117,21 @@ cuadros = alt.Chart(df_sector).mark_rect(stroke='white', strokeWidth=1.5).encode
 # 5. Agregar el texto en el centro de los cuadros
 texto = alt.Chart(df_sector).transform_calculate(
     x_centro='(datum.x + datum.x2) / 2',
-    y_centro='(datum.y + datum.y2) / 2'
-).mark_text(align='center', baseline='middle', fontSize=10, limit=80).encode(
+    y_centro='(datum.y + datum.y2) / 2',
+    # Dividimos el texto en una lista de palabras para crear múltiples líneas
+    etiqueta_multilinea="split(datum.tep_descripcion_clean, ' ')" 
+).mark_text(
+    align='center', 
+    baseline='middle', 
+    fontSize=10, 
+    clip=True # Corta el texto limpio si se sale de la caja, sin puntos suspensivos
+    # Eliminamos el limit=80
+).encode(
     x='x_centro:Q',
     y='y_centro:Q',
-    text='tep_descripcion_clean:N',
-    # Ocultamos el texto de los cuadros muy pequeños para que no se amontone
-    opacity=alt.condition(alt.datum.Total > 50, alt.value(1), alt.value(0))
+    text='etiqueta_multilinea:N', # Usamos la nueva variable dividida
+    # Subimos un poco el umbral (de 50 a 100) para que las cajas enanas queden limpias
+    opacity=alt.condition(alt.datum.Total > 100, alt.value(1), alt.value(0))
 )
 
 # Unimos las capas y mostramos
@@ -134,10 +146,12 @@ grafico_treemap = (cuadros + texto).properties(
 grafico_treemap
 ```
 
-**Interpretación:** ...
+**Interpretación:** El treemap revela que el tipo de empresa más grande es la empresa privada, sin embargo, las empresas de constucción y sobre todo las empresas pequeñas (emprendimientos), presentan tasas de desempleo más altas, lo que sugiere que estos sectores podrían ser más vulnerables a los choques económicos. Por otro lado, sectores como el público y el financiero muestran áreas más pequeñas pero con tasas de desempleo relativamente bajas, indicando una mayor estabilidad laboral en esos sectores.
 
 ## 3. Rentabilidad Empresarial vs. Nivel Educativo
 **Pregunta:** ¿Una empresa con baja rentabilidad (ROA) protege a perfiles con mayor educación o el despido es generalizado?
+
+**Justificación:** Se optó por un gráfico de calor (heatmap) para visualizar la relación entre la rentabilidad de las empresas (ROA) y el nivel educativo de los empleados en relación con el riesgo de desempleo. Este tipo de gráfico permite identificar rápidamente las áreas donde el riesgo es más alto, mostrando cómo la combinación de una baja rentabilidad y un nivel educativo específico puede influir en la probabilidad de perder el empleo. Es una forma efectiva de representar interacciones complejas entre variables categóricas y continuas, facilitando la interpretación visual de los datos.
 
 ```{python}
 #| label: fig-heatmap
@@ -184,4 +198,4 @@ grafico_calor = alt.Chart(df).mark_rect(stroke='white', strokeWidth=0.5).encode(
 grafico_calor
 ```
 
-**Interpretación:** ...
+**Interpretación:** El heatmap muestra una clara concentración de riesgo en las personas que no tienen educación. Al contrario de la rentabilidad, que no muestra un patrón tan definido, excepto en los niveles más altos de educación, donde ahí si se identifica de forma más clara que las empresas con ROA más bajo, tienden a despedir a más empleados que las empresas con ROA más alto. Esto sugiere que puede existir una clasificación escondida del tipo de empresa más allá del ROA. Es probable que las empresas que contratan personas con mayor educación sean inherentemente diferentes a las que contratan personas con menor nivel de formación, por lo que el comportamiendo de despido difiere entre ambos tipos de empresa, lo que se refleja en el heatmap. En general, el riesgo de desempleo es más alto para los empleados con menor nivel educativo, independientemente de la rentabilidad de la empresa, aunque esta última sí parece influir más en los niveles educativos superiores.

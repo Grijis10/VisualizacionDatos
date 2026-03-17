@@ -25,6 +25,8 @@ df.head()
 
 ```
 
+Visualizamos que la base tiene aproximadamente 2.2 millones de registros y un total de 28 columnas, de las cuales 11 son de interés para nuestro análisis. Además, se observa que algunas columnas tienen valores nulos, lo que nos llevará a realizar una limpieza cuidadosa para asegurar la calidad de los datos antes de proceder al muestreo y análisis visual.
+
 ## 2. Limpieza de Datos
 
 ```{python}
@@ -77,6 +79,8 @@ df_limpio = df_limpio.dropna()
 print(f"\nTotal de registros listos para el muestreo: {len(df_limpio)}")
 ```
 
+Adicionalmente, se decidió aplicar un capping estadístico al ROA para limitar el impacto de valores extremos en los análisis visuales posteriores. Esto se hará truncando los valores por debajo del percentil 1 y por encima del percentil 99.
+
 ```{python}
 #| label: capping-financiero
 
@@ -101,6 +105,7 @@ print("✅ Capping estadístico completado exitosamente para visualización.")
 print(f"Rango del ROA ajustado: [{umbrales_calculados['roa'][0]:.4f}, {umbrales_calculados['roa'][1]:.4f}]")
 ```
 
+Debido a las limitaciones de Altair, se decidió realizar un muestreo balanceado de 5,000 registros (2,500 empleados y 2,500 desempleados) para garantizar que los gráficos sean claros y representativos sin perder la calidad visual.
 
 ## 3. Muestreo para Análisis Visual
 ```{python}
