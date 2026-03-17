@@ -121,7 +121,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#distribución-demográfica-del-desempleo" id="toc-distribución-demográfica-del-desempleo" class="nav-link active" data-scroll-target="#distribución-demográfica-del-desempleo">1. Distribución Demográfica del Desempleo</a></li>
-  <li><a href="#mapa-de-riesgo-por-sector-económico" id="toc-mapa-de-riesgo-por-sector-económico" class="nav-link" data-scroll-target="#mapa-de-riesgo-por-sector-económico">2. Mapa de Riesgo por Sector Económico</a></li>
+  <li><a href="#mapa-de-riesgo-por-tipo-de-empresa" id="toc-mapa-de-riesgo-por-tipo-de-empresa" class="nav-link" data-scroll-target="#mapa-de-riesgo-por-tipo-de-empresa">2. Mapa de Riesgo por Tipo de Empresa</a></li>
   <li><a href="#rentabilidad-empresarial-vs.-nivel-educativo" id="toc-rentabilidad-empresarial-vs.-nivel-educativo" class="nav-link" data-scroll-target="#rentabilidad-empresarial-vs.-nivel-educativo">3. Rentabilidad Empresarial vs.&nbsp;Nivel Educativo</a></li>
   </ul>
 </nav>
@@ -151,29 +151,30 @@ ul.task-list li input[type="checkbox"] {
 <section id="distribución-demográfica-del-desempleo" class="level2">
 <h2 class="anchored" data-anchor-id="distribución-demográfica-del-desempleo">1. Distribución Demográfica del Desempleo</h2>
 <p><strong>Pregunta:</strong> ¿Cómo influyen la edad y el género en el riesgo de desempleo?</p>
+<p><strong>Justificación:</strong> Se realizó un gráfico de montañas (ridgeline plot) para visualizar la distribución de edad entre las personas desempleadas, segmentado por género. Esto permite identificar patrones de riesgo de desempleo según la edad y el género, facilitando la interpretación de los datos demográficos en relación con el desempleo y resulta más intuitivo y legible que un histograma tradicional.</p>
 <div id="cell-fig-montanas" class="cell" data-execution_count="1">
 <div id="fig-montanas" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-montanas-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 
 <style>
-  #altair-viz-4c9fc100db644a91b323045e51518f34.vega-embed {
+  #altair-viz-1cc7247a0232480c854150341153aafc.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-4c9fc100db644a91b323045e51518f34.vega-embed details,
-  #altair-viz-4c9fc100db644a91b323045e51518f34.vega-embed details summary {
+  #altair-viz-1cc7247a0232480c854150341153aafc.vega-embed details,
+  #altair-viz-1cc7247a0232480c854150341153aafc.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-4c9fc100db644a91b323045e51518f34"></div>
+<div id="altair-viz-1cc7247a0232480c854150341153aafc"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-4c9fc100db644a91b323045e51518f34") {
-      outputDiv = document.getElementById("altair-viz-4c9fc100db644a91b323045e51518f34");
+    if (outputDiv.id !== "altair-viz-1cc7247a0232480c854150341153aafc") {
+      outputDiv = document.getElementById("altair-viz-1cc7247a0232480c854150341153aafc");
     }
 
     const paths = {
@@ -230,11 +231,12 @@ Figure&nbsp;1: Distribución de edad de personas desempleadas según su género.
 </figure>
 </div>
 </div>
-<p><strong>Interpretación:</strong> …</p>
+<p><strong>Interpretación:</strong> Lo que podemos visualizar es que ambas distribuciones tienen su pico alrededor de los 25-30 años, pero el género masculino muestra una distribución ligeramente más amplia, lo que podría indicar que los hombres enfrentan un riesgo de desempleo más disperso a lo largo de diferentes edades. Además, se observa que el área bajo la curva para los hombres es mayor, lo que sugiere una mayor proporción de desempleo en comparación con las mujeres.</p>
 </section>
-<section id="mapa-de-riesgo-por-sector-económico" class="level2">
-<h2 class="anchored" data-anchor-id="mapa-de-riesgo-por-sector-económico">2. Mapa de Riesgo por Sector Económico</h2>
-<p><strong>Pregunta:</strong> ¿Qué sectores de la economía ecuatoriana están en mayor peligro?</p>
+<section id="mapa-de-riesgo-por-tipo-de-empresa" class="level2">
+<h2 class="anchored" data-anchor-id="mapa-de-riesgo-por-tipo-de-empresa">2. Mapa de Riesgo por Tipo de Empresa</h2>
+<p><strong>Pregunta:</strong> ¿Qué empresas de la economía ecuatoriana están en mayor peligro?</p>
+<p><strong>Justificación:</strong> Se optó por un gráfico de treemap para visualizar el riesgo de desempleo por tipo de empresa, ya que permite representar simultáneamente la proporción de personas desempleadas (área) y la tasa de desempleo (color) en cada empresa. Esto facilita la identificación visual de los sectores más vulnerables, mostrando claramente cuáles tienen mayor concentración de desempleo y cuáles presentan tasas más altas, todo en un formato compacto y fácil de interpretar.</p>
 <div id="cell-fig-treemap" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-stdout">
 <pre><code>Requirement already satisfied: squarify in c:\users\danie\onedrive\2026\maestria ciencia de datos\visualizacion de datos\trabajo_final\.venv\lib\site-packages (0.4.4)</code></pre>
@@ -244,23 +246,23 @@ Figure&nbsp;1: Distribución de edad de personas desempleadas según su género.
 <div aria-describedby="fig-treemap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 
 <style>
-  #altair-viz-713b73c7134c4273814e0fc775d95ca3.vega-embed {
+  #altair-viz-a969a20fd60d43419e5cf29b2c340455.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-713b73c7134c4273814e0fc775d95ca3.vega-embed details,
-  #altair-viz-713b73c7134c4273814e0fc775d95ca3.vega-embed details summary {
+  #altair-viz-a969a20fd60d43419e5cf29b2c340455.vega-embed details,
+  #altair-viz-a969a20fd60d43419e5cf29b2c340455.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-713b73c7134c4273814e0fc775d95ca3"></div>
+<div id="altair-viz-a969a20fd60d43419e5cf29b2c340455"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-713b73c7134c4273814e0fc775d95ca3") {
-      outputDiv = document.getElementById("altair-viz-713b73c7134c4273814e0fc775d95ca3");
+    if (outputDiv.id !== "altair-viz-a969a20fd60d43419e5cf29b2c340455") {
+      outputDiv = document.getElementById("altair-viz-a969a20fd60d43419e5cf29b2c340455");
     }
 
     const paths = {
@@ -308,7 +310,7 @@ Figure&nbsp;1: Distribución de edad de personas desempleadas según su género.
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300, "strokeWidth": 0}}, "layer": [{"mark": {"type": "rect", "stroke": "white", "strokeWidth": 1.5}, "encoding": {"color": {"field": "Tasa_Desempleo", "legend": {"format": ".1%"}, "scale": {"scheme": "reds"}, "title": "Tasa de Desempleo", "type": "quantitative"}, "tooltip": [{"field": "tep_descripcion_clean", "title": "Tipo de Empresa", "type": "nominal"}, {"field": "Total", "title": "Total en Muestra", "type": "quantitative"}, {"field": "Tasa_Desempleo", "format": ".1%", "title": "Tasa de Desempleo", "type": "quantitative"}], "x": {"axis": null, "field": "x", "type": "quantitative"}, "x2": {"field": "x2"}, "y": {"axis": null, "field": "y", "type": "quantitative"}, "y2": {"field": "y2"}}, "name": "view_799e50bd97c62fc5_0"}, {"mark": {"type": "text", "align": "center", "baseline": "middle", "fontSize": 10, "limit": 80}, "encoding": {"opacity": {"condition": {"test": "(datum.Total > 50)", "value": 1}, "value": 0}, "text": {"field": "tep_descripcion_clean", "type": "nominal"}, "x": {"field": "x_centro", "type": "quantitative"}, "y": {"field": "y_centro", "type": "quantitative"}}, "transform": [{"calculate": "(datum.x + datum.x2) / 2", "as": "x_centro"}, {"calculate": "(datum.y + datum.y2) / 2", "as": "y_centro"}]}], "data": {"name": "data-d394796cfd1ad535c042bec92d80c72c"}, "height": 400, "params": [{"name": "param_1e9efca18e7a2868", "select": {"type": "interval", "encodings": ["x", "y"]}, "bind": "scales", "views": ["view_799e50bd97c62fc5_0"]}], "title": "Riesgo de Desempleo seg\u00fan el Tipo de Empresa", "width": 650, "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json", "datasets": {"data-d394796cfd1ad535c042bec92d80c72c": [{"tep_descripcion_clean": "EMPRESA PRIVADA -SOCIEDADES / COMPANIAS", "Total": 3090, "Tasa_Desempleo": 0.5359223300970873, "x": 0.0, "y": 0.0, "x2": 61.8, "y2": 100.0}, {"tep_descripcion_clean": "FUNCION EJECUTIVA, LEGISL, JUDICIAL Y ORGANISMOS DEL ESTADO", "Total": 665, "Tasa_Desempleo": 0.3458646616541353, "x": 61.8, "y": 0.0, "x2": 100.0, "y2": 34.816753926701566}, {"tep_descripcion_clean": "EMPRESA UNIPERSONAL /  PEQUE\u00d1A INDUSTRIA", "Total": 369, "Tasa_Desempleo": 0.6233062330623306, "x": 61.8, "y": 34.816753926701566, "x2": 100.0, "y2": 54.136125654450254}, {"tep_descripcion_clean": "ORGANISMOS DEL REGIMEN SECCIONAL", "Total": 281, "Tasa_Desempleo": 0.47330960854092524, "x": 61.8, "y": 54.136125654450254, "x2": 86.36338672768879, "y2": 77.01570680628271}, {"tep_descripcion_clean": "ENTIDADES PUBLICAS CON AUTONOMIA", "Total": 156, "Tasa_Desempleo": 0.3333333333333333, "x": 86.36338672768879, "y": 54.136125654450254, "x2": 100.0, "y2": 77.01570680628271}, {"tep_descripcion_clean": "EMPLEADOR DOMESTICO", "Total": 140, "Tasa_Desempleo": 0.40714285714285714, "x": 61.8, "y": 77.01570680628271, "x2": 73.98223234624145, "y2": 100.0}, {"tep_descripcion_clean": "CONSTRUCCION", "Total": 69, "Tasa_Desempleo": 0.6956521739130435, "x": 73.98223234624145, "y": 77.01570680628271, "x2": 84.51116173120727, "y2": 90.12245251179091}, {"tep_descripcion_clean": "ENTIDADES P\u00daBLICAS DE EDUCACI\u00d3N SUPERIOR", "Total": 52, "Tasa_Desempleo": 0.4230769230769231, "x": 73.98223234624145, "y": 90.12245251179091, "x2": 84.51116173120727, "y2": 100.0}, {"tep_descripcion_clean": "INSTITUCION FINANCIERA PRIVADA, BANCOS Y CIA DE SEGUROS", "Total": 51, "Tasa_Desempleo": 0.3333333333333333, "x": 84.51116173120727, "y": 77.01570680628271, "x2": 93.00504078183553, "y2": 89.02435437378666}, {"tep_descripcion_clean": "MICRO EMPRESA (NO ARTESANAL)", "Total": 42, "Tasa_Desempleo": 0.4523809523809524, "x": 93.00504078183553, "y": 77.01570680628271, "x2": 99.99999999999999, "y2": 89.02435437378666}, {"tep_descripcion_clean": "COOP AHORRO  CRED. VIVIENDA ETC.CONTR SUPER  DE BANCOS", "Total": 22, "Tasa_Desempleo": 0.3181818181818182, "x": 84.51116173120727, "y": 89.02435437378666, "x2": 92.34669167894944, "y2": 94.63980097324465}, {"tep_descripcion_clean": "COOPERA  NO CONTROLADAS POR LA SUPERINTENDENCIA  DE BANCOS", "Total": 21, "Tasa_Desempleo": 0.38095238095238093, "x": 84.51116173120727, "y": 94.63980097324465, "x2": 92.34669167894944, "y2": 100.0}, {"tep_descripcion_clean": "MIEMBROS DE   SINDICATOS  Y COOP DE TRANSPORTE TERRESTRE", "Total": 14, "Tasa_Desempleo": 0.5714285714285714, "x": 92.34669167894944, "y": 89.02435437378666, "x2": 96.31507377134602, "y2": 96.08012656206662}, {"tep_descripcion_clean": "ENTIDADES FINANCIERAS", "Total": 13, "Tasa_Desempleo": 0.38461538461538464, "x": 96.31507377134602, "y": 89.02435437378666, "x2": 99.99999999999999, "y2": 96.08012656206662}, {"tep_descripcion_clean": "OTRAS FINANC. PRIVAD, MUTUALISTAS ETC", "Total": 6, "Tasa_Desempleo": 0.5, "x": 92.34669167894944, "y": 96.08012656206662, "x2": 95.40801500736961, "y2": 100.0}, {"tep_descripcion_clean": "NOTARIAS, (LOS REGITRADORES  SON P\u00daBLICOS)", "Total": 5, "Tasa_Desempleo": 0.4, "x": 95.40801500736961, "y": 96.08012656206662, "x2": 97.95911778105308, "y2": 100.0}, {"tep_descripcion_clean": "EMBAJADAS, MISIONES DIPL., CONSULARES, ORG. INTERNACIONAL", "Total": 4, "Tasa_Desempleo": 0.75, "x": 97.95911778105308, "y": 96.08012656206662, "x2": 99.99999999999999, "y2": 99.99999999999976}]}}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 300, "continuousHeight": 300, "strokeWidth": 0}}, "layer": [{"mark": {"type": "rect", "stroke": "white", "strokeWidth": 1.5}, "encoding": {"color": {"field": "Tasa_Desempleo", "legend": {"format": ".1%"}, "scale": {"scheme": "reds"}, "title": "Tasa de Desempleo", "type": "quantitative"}, "tooltip": [{"field": "tep_descripcion_clean", "title": "Tipo de Empresa", "type": "nominal"}, {"field": "Total", "title": "Total en Muestra", "type": "quantitative"}, {"field": "Tasa_Desempleo", "format": ".1%", "title": "Tasa de Desempleo", "type": "quantitative"}], "x": {"axis": null, "field": "x", "type": "quantitative"}, "x2": {"field": "x2"}, "y": {"axis": null, "field": "y", "type": "quantitative"}, "y2": {"field": "y2"}}, "name": "view_799e50bd97c62fc5_0"}, {"mark": {"type": "text", "align": "center", "baseline": "middle", "clip": true, "fontSize": 10}, "encoding": {"opacity": {"condition": {"test": "(datum.Total > 100)", "value": 1}, "value": 0}, "text": {"field": "etiqueta_multilinea", "type": "nominal"}, "x": {"field": "x_centro", "type": "quantitative"}, "y": {"field": "y_centro", "type": "quantitative"}}, "transform": [{"calculate": "(datum.x + datum.x2) / 2", "as": "x_centro"}, {"calculate": "(datum.y + datum.y2) / 2", "as": "y_centro"}, {"calculate": "split(datum.tep_descripcion_clean, ' ')", "as": "etiqueta_multilinea"}]}], "data": {"name": "data-d394796cfd1ad535c042bec92d80c72c"}, "height": 400, "params": [{"name": "param_1e9efca18e7a2868", "select": {"type": "interval", "encodings": ["x", "y"]}, "bind": "scales", "views": ["view_799e50bd97c62fc5_0"]}], "title": "Riesgo de Desempleo seg\u00fan el Tipo de Empresa", "width": 650, "$schema": "https://vega.github.io/schema/vega-lite/v6.1.0.json", "datasets": {"data-d394796cfd1ad535c042bec92d80c72c": [{"tep_descripcion_clean": "EMPRESA PRIVADA -SOCIEDADES / COMPANIAS", "Total": 3090, "Tasa_Desempleo": 0.5359223300970873, "x": 0.0, "y": 0.0, "x2": 61.8, "y2": 100.0}, {"tep_descripcion_clean": "FUNCION EJECUTIVA, LEGISL, JUDICIAL Y ORGANISMOS DEL ESTADO", "Total": 665, "Tasa_Desempleo": 0.3458646616541353, "x": 61.8, "y": 0.0, "x2": 100.0, "y2": 34.816753926701566}, {"tep_descripcion_clean": "EMPRESA UNIPERSONAL /  PEQUE\u00d1A INDUSTRIA", "Total": 369, "Tasa_Desempleo": 0.6233062330623306, "x": 61.8, "y": 34.816753926701566, "x2": 100.0, "y2": 54.136125654450254}, {"tep_descripcion_clean": "ORGANISMOS DEL REGIMEN SECCIONAL", "Total": 281, "Tasa_Desempleo": 0.47330960854092524, "x": 61.8, "y": 54.136125654450254, "x2": 86.36338672768879, "y2": 77.01570680628271}, {"tep_descripcion_clean": "ENTIDADES PUBLICAS CON AUTONOMIA", "Total": 156, "Tasa_Desempleo": 0.3333333333333333, "x": 86.36338672768879, "y": 54.136125654450254, "x2": 100.0, "y2": 77.01570680628271}, {"tep_descripcion_clean": "EMPLEADOR DOMESTICO", "Total": 140, "Tasa_Desempleo": 0.40714285714285714, "x": 61.8, "y": 77.01570680628271, "x2": 73.98223234624145, "y2": 100.0}, {"tep_descripcion_clean": "CONSTRUCCION", "Total": 69, "Tasa_Desempleo": 0.6956521739130435, "x": 73.98223234624145, "y": 77.01570680628271, "x2": 84.51116173120727, "y2": 90.12245251179091}, {"tep_descripcion_clean": "ENTIDADES P\u00daBLICAS DE EDUCACI\u00d3N SUPERIOR", "Total": 52, "Tasa_Desempleo": 0.4230769230769231, "x": 73.98223234624145, "y": 90.12245251179091, "x2": 84.51116173120727, "y2": 100.0}, {"tep_descripcion_clean": "INSTITUCION FINANCIERA PRIVADA, BANCOS Y CIA DE SEGUROS", "Total": 51, "Tasa_Desempleo": 0.3333333333333333, "x": 84.51116173120727, "y": 77.01570680628271, "x2": 93.00504078183553, "y2": 89.02435437378666}, {"tep_descripcion_clean": "MICRO EMPRESA (NO ARTESANAL)", "Total": 42, "Tasa_Desempleo": 0.4523809523809524, "x": 93.00504078183553, "y": 77.01570680628271, "x2": 99.99999999999999, "y2": 89.02435437378666}, {"tep_descripcion_clean": "COOP AHORRO  CRED. VIVIENDA ETC.CONTR SUPER  DE BANCOS", "Total": 22, "Tasa_Desempleo": 0.3181818181818182, "x": 84.51116173120727, "y": 89.02435437378666, "x2": 92.34669167894944, "y2": 94.63980097324465}, {"tep_descripcion_clean": "COOPERA  NO CONTROLADAS POR LA SUPERINTENDENCIA  DE BANCOS", "Total": 21, "Tasa_Desempleo": 0.38095238095238093, "x": 84.51116173120727, "y": 94.63980097324465, "x2": 92.34669167894944, "y2": 100.0}, {"tep_descripcion_clean": "MIEMBROS DE   SINDICATOS  Y COOP DE TRANSPORTE TERRESTRE", "Total": 14, "Tasa_Desempleo": 0.5714285714285714, "x": 92.34669167894944, "y": 89.02435437378666, "x2": 96.31507377134602, "y2": 96.08012656206662}, {"tep_descripcion_clean": "ENTIDADES FINANCIERAS", "Total": 13, "Tasa_Desempleo": 0.38461538461538464, "x": 96.31507377134602, "y": 89.02435437378666, "x2": 99.99999999999999, "y2": 96.08012656206662}, {"tep_descripcion_clean": "OTRAS FINANC. PRIVAD, MUTUALISTAS ETC", "Total": 6, "Tasa_Desempleo": 0.5, "x": 92.34669167894944, "y": 96.08012656206662, "x2": 95.40801500736961, "y2": 100.0}, {"tep_descripcion_clean": "NOTARIAS, (LOS REGITRADORES  SON P\u00daBLICOS)", "Total": 5, "Tasa_Desempleo": 0.4, "x": 95.40801500736961, "y": 96.08012656206662, "x2": 97.95911778105308, "y2": 100.0}, {"tep_descripcion_clean": "EMBAJADAS, MISIONES DIPL., CONSULARES, ORG. INTERNACIONAL", "Total": 4, "Tasa_Desempleo": 0.75, "x": 97.95911778105308, "y": 96.08012656206662, "x2": 99.99999999999999, "y2": 99.99999999999976}]}}, {"mode": "vega-lite"});
 </script>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-treemap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -317,34 +319,35 @@ Figure&nbsp;2: Tamaño del sector (área) vs.&nbsp;Tasa de desempleo (color).
 </figure>
 </div>
 </div>
-<p><strong>Interpretación:</strong> …</p>
+<p><strong>Interpretación:</strong> El treemap revela que el tipo de empresa más grande es la empresa privada, sin embargo, las empresas de constucción y sobre todo las empresas pequeñas (emprendimientos), presentan tasas de desempleo más altas, lo que sugiere que estos sectores podrían ser más vulnerables a los choques económicos. Por otro lado, sectores como el público y el financiero muestran áreas más pequeñas pero con tasas de desempleo relativamente bajas, indicando una mayor estabilidad laboral en esos sectores.</p>
 </section>
 <section id="rentabilidad-empresarial-vs.-nivel-educativo" class="level2">
 <h2 class="anchored" data-anchor-id="rentabilidad-empresarial-vs.-nivel-educativo">3. Rentabilidad Empresarial vs.&nbsp;Nivel Educativo</h2>
 <p><strong>Pregunta:</strong> ¿Una empresa con baja rentabilidad (ROA) protege a perfiles con mayor educación o el despido es generalizado?</p>
+<p><strong>Justificación:</strong> Se optó por un gráfico de calor (heatmap) para visualizar la relación entre la rentabilidad de las empresas (ROA) y el nivel educativo de los empleados en relación con el riesgo de desempleo. Este tipo de gráfico permite identificar rápidamente las áreas donde el riesgo es más alto, mostrando cómo la combinación de una baja rentabilidad y un nivel educativo específico puede influir en la probabilidad de perder el empleo. Es una forma efectiva de representar interacciones complejas entre variables categóricas y continuas, facilitando la interpretación visual de los datos.</p>
 <div id="cell-fig-heatmap" class="cell" data-execution_count="3">
 <div id="fig-heatmap" class="cell-output cell-output-display quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 
 <style>
-  #altair-viz-337855fb781f4e3190e05d16d2851b2d.vega-embed {
+  #altair-viz-3bdd4749549b435b90f67ef5c85ee07e.vega-embed {
     width: 100%;
     display: flex;
   }
 
-  #altair-viz-337855fb781f4e3190e05d16d2851b2d.vega-embed details,
-  #altair-viz-337855fb781f4e3190e05d16d2851b2d.vega-embed details summary {
+  #altair-viz-3bdd4749549b435b90f67ef5c85ee07e.vega-embed details,
+  #altair-viz-3bdd4749549b435b90f67ef5c85ee07e.vega-embed details summary {
     position: relative;
   }
 </style>
-<div id="altair-viz-337855fb781f4e3190e05d16d2851b2d"></div>
+<div id="altair-viz-3bdd4749549b435b90f67ef5c85ee07e"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-337855fb781f4e3190e05d16d2851b2d") {
-      outputDiv = document.getElementById("altair-viz-337855fb781f4e3190e05d16d2851b2d");
+    if (outputDiv.id !== "altair-viz-3bdd4749549b435b90f67ef5c85ee07e") {
+      outputDiv = document.getElementById("altair-viz-3bdd4749549b435b90f67ef5c85ee07e");
     }
 
     const paths = {
@@ -401,7 +404,7 @@ Figure&nbsp;3: Riesgo de desempleo según la rentabilidad (ROA) y nivel educativ
 </figure>
 </div>
 </div>
-<p><strong>Interpretación:</strong> …</p>
+<p><strong>Interpretación:</strong> El heatmap muestra una clara concentración de riesgo en las personas que no tienen educación. Al contrario de la rentabilidad, que no muestra un patrón tan definido, excepto en los niveles más altos de educación, donde ahí si se identifica de forma más clara que las empresas con ROA más bajo, tienden a despedir a más empleados que las empresas con ROA más alto. Esto sugiere que puede existir una clasificación escondida del tipo de empresa más allá del ROA. Es probable que las empresas que contratan personas con mayor educación sean inherentemente diferentes a las que contratan personas con menor nivel de formación, por lo que el comportamiendo de despido difiere entre ambos tipos de empresa, lo que se refleja en el heatmap. En general, el riesgo de desempleo es más alto para los empleados con menor nivel educativo, independientemente de la rentabilidad de la empresa, aunque esta última sí parece influir más en los niveles educativos superiores.</p>
 
 
 </section>

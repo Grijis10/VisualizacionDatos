@@ -395,6 +395,7 @@ memory usage: 129.3 MB</code></pre>
 </div>
 </div>
 </div>
+<p>Visualizamos que la base tiene aproximadamente 2.2 millones de registros y un total de 28 columnas, de las cuales 11 son de interés para nuestro análisis. Además, se observa que algunas columnas tienen valores nulos, lo que nos llevará a realizar una limpieza cuidadosa para asegurar la calidad de los datos antes de proceder al muestreo y análisis visual.</p>
 </section>
 <section id="limpieza-de-datos" class="level2">
 <h2 class="anchored" data-anchor-id="limpieza-de-datos">2. Limpieza de Datos</h2>
@@ -592,6 +593,7 @@ dtype: int64
 Total de registros listos para el muestreo: 2258935</code></pre>
 </div>
 </div>
+<p>Adicionalmente, se decidió aplicar un capping estadístico al ROA para limitar el impacto de valores extremos en los análisis visuales posteriores. Esto se hará truncando los valores por debajo del percentil 1 y por encima del percentil 99.</p>
 <div id="capping-financiero" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Definir las variables financieras a truncar</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>vars_financieras <span class="op">=</span> [<span class="st">'roa'</span>]</span>
@@ -617,6 +619,7 @@ Total de registros listos para el muestreo: 2258935</code></pre>
 Rango del ROA ajustado: [-18.9247, 28.6028]</code></pre>
 </div>
 </div>
+<p>Debido a las limitaciones de Altair, se decidió realizar un muestreo balanceado de 5,000 registros (2,500 empleados y 2,500 desempleados) para garantizar que los gráficos sean claros y representativos sin perder la calidad visual.</p>
 </section>
 <section id="muestreo-para-análisis-visual" class="level2">
 <h2 class="anchored" data-anchor-id="muestreo-para-análisis-visual">3. Muestreo para Análisis Visual</h2>
